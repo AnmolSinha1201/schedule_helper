@@ -43,7 +43,7 @@ const renderPositions = (positions) => {
 	);
 }
 
-const Map = () => {
+const MapView = () => {
 	return (
 		<div className={styles.MapWrapper}>
 			{/* height and width style needed for leaflet to adjust to parent */}
@@ -63,4 +63,4 @@ const Map = () => {
 	)
 }
 
-export default Map
+export default MapView
