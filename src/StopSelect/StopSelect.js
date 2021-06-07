@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button'
 import MapView from '../Map/Map'
 import styles from './StopSelect.module.css'
 import DisplayTable from '../Table/Table'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 const StopSelect = () => {
 	const [ allStopsNamesA, setAllStopsNamesA ] = useState(['Maria'])
@@ -31,9 +33,12 @@ const StopSelect = () => {
 		<div className={styles.Wrapper}>
 			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={mariaStop} end={allData[selectedIndex]} className={styles.MapViewWrapper}/>
 			<div className={styles.SelectorsWrapper}>
-				<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
-				<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
-				<Button variant="primary" onClick={clickHandler}>Primary</Button>
+				<div className={styles.ControlsWrapper}>
+					<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
+					<FontAwesomeIcon icon={faExchangeAlt} />
+					<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
+					<Button variant="primary" onClick={clickHandler}>Submit</Button>
+				</div>
 				<DisplayTable schedule={itineraries}/>
 			</div>
 		</div>

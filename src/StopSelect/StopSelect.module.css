@@ -20,3 +20,10 @@
 
 	padding: 20px;
 }
+
+.ControlsWrapper
+{
+	display: flex;
+	width: 70%;
+	justify-content: space-evenly;
+}
