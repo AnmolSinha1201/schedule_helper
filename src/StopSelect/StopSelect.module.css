@@ -3,10 +3,12 @@
 	width: 100%;
 	height: calc(100% - var(--navbar-height));
 	display: flex;
+
+	--map-width: 40%;
 }
 
 .MapViewWrapper
 {
 	height: 100%;
-	width: 30%;
+	width: var(--map-width);
 }
