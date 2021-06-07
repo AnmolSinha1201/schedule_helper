@@ -21,7 +21,7 @@ const StopSelect = () => {
 
 	const clickHandler = () => {
 		console.log(`Between Maria and`, allData[selectedIndex])
-		getItenerary(mariaStop, allData[selectedIndex])
+		getItinerary(mariaStop, allData[selectedIndex])
 		.then(result => {
 			console.log(result)
 			const polyUtil = require('polyline-encoded');
@@ -59,7 +59,7 @@ const getAllStops = () => {
 	}).then(response => response.json())
 }
 
-const getItenerary = (from, to) => {
+const getItinerary = (from, to) => {
 	return fetch('https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql', {
 		method: 'POST',
 		headers: { 'Content-Type' : 'application/graphql' },
