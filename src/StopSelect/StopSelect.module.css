@@ -12,3 +12,11 @@
 	height: 100%;
 	width: var(--map-width);
 }
+
+.SelectorsWrapper
+{
+	height: 100%;
+	width: calc(100% - var(--map-width));
+
+	padding: 20px;
+}
