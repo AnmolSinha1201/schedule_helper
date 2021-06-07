@@ -53,8 +53,8 @@ const getItenerary = (from, to) => {
 		headers: { 'Content-Type' : 'application/graphql' },
 		body : `{
 			plan(
-				from: {lat: 60.168992, lon: 24.932366}
-				to: {lat: 60.175294, lon: 24.684855}
+				from: {lat: ${from.lat}, lon: ${from.lon}}
+				to: {lat: ${to.lat}, lon: ${to.lon}}
 				numItineraries: 3
 			) {
 				itineraries {
