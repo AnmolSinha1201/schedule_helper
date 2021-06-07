@@ -21,26 +21,10 @@ const randomMax = (max) => {
 }
 
 const renderPositions = (positions, index) => {
-	const color = '#' + randomMax(64).toString(16) + randomMax(64).toString(16) + randomMax(64).toString(16);
+	const color = ('#' + randomMax(64).toString(16) + randomMax(64).toString(16) + randomMax(64).toString(16)).padEnd(7, '0');
 	console.log(color)
 	return (
-		<>
-		<Polyline color={'#' + Math.random().toString(16).substr(-6) } positions={positions} weight={3} key={index} />
-		{/* {positions.map((position, index) => (
-			<CircleMarker
-			key={index}
-			center={position}
-			fill={true}
-			color="#220bb9"
-			radius={3}
-			>
-			<Popup>
-				<b>lat:</b> {position.lat} <br />
-				<b>lng:</b> {position.lng} <br />
-			</Popup>
-			</CircleMarker>
-		))} */}
-		</>
+		<Polyline color={color } positions={positions} weight={4} key={index} />
 	);
 }
 
