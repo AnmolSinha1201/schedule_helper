@@ -2,6 +2,7 @@ import {useEffect, useState} from 'react'
 import FilterDropDown from '../FilterDropDown/FilterDropDown'
 import Button from 'react-bootstrap/Button'
 import MapView from '../Map/Map'
+import styles from './StopSelect.module.css'
 
 const StopSelect = () => {
 	const [ allStopsNamesA, setAllStopsNamesA ] = useState(['Maria'])
@@ -30,11 +31,13 @@ const StopSelect = () => {
 	}
 
 	return (
-		<div>
-			<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
-			<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
-			<Button variant="primary" onClick={clickHandler}>Primary</Button>
-			<MapView coordinatesArray={coordinates} start={mariaStop} end={allData[selectedIndex]} />
+		<div class={styles.Wrapper}>
+			<MapView coordinatesArray={coordinates} start={mariaStop} end={allData[selectedIndex]} className={styles.MapViewWrapper}/>
+			<div class={styles.Selectors}>
+				<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
+				<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
+				<Button variant="primary" onClick={clickHandler}>Primary</Button>
+			</div>
 		</div>
 	)
 }

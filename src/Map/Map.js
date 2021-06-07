@@ -56,12 +56,12 @@ const marker = (coordinate) => {
 	return (<></>)
 }
 
-const MapView = ({coordinatesArray, start, end}) => {
+const MapView = ({coordinatesArray, start, end, className}) => {
 	
 	return (
-		<div className={styles.MapWrapper}>
+		<div className={[styles.MapWrapper, className].join(' ')}>
 			{/* height and width style needed for leaflet to adjust to parent */}
-			<MapContainer center={[60.1699, 24.9384]} zoom={13} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }} >
+			<MapContainer center={[start.lat, start.lon]} zoom={13} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }} >
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

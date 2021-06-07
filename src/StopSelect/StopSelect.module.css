@@ -1,0 +1,12 @@
+.Wrapper
+{
+	width: 100%;
+	height: calc(100% - var(--navbar-height));
+	display: flex;
+}
+
+.MapViewWrapper
+{
+	height: 100%;
+	width: 30%;
+}
