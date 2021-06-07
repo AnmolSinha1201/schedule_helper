@@ -1,0 +1,57 @@
+.NavbarWrapper
+{
+	width: 100%;
+	height: 60px;
+	background-color: #333;
+	color: white;
+
+	position: relative;
+}
+
+.Title
+{
+	position: absolute;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+
+	font-size: 1.6em;
+}
+
+.NavigationItems
+{
+	display: flex;
+	width: 200px;
+	justify-content: space-between;
+	height: 100%;
+
+	position: absolute;
+	left: 300px;
+}
+
+.SingleNavigationItem
+{
+	position: relative;
+	height: 100%;
+	width: 95px;
+	cursor: pointer;
+}
+
+.SingleNavigationItem:hover
+{
+	background-image: linear-gradient(to bottom, #5552, rgba(0, 0, 0, 0));
+}
+
+.TextContainer
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+}
+
+.SelectedItem
+{
+	background-image: linear-gradient(to bottom, #aaa2, rgba(0, 0, 0, 0));
+}
