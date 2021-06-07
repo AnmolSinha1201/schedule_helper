@@ -59,13 +59,17 @@ const getItenerary = (from, to) => {
 			) {
 				itineraries {
 					legs {
-					startTime
-					endTime
-					mode
-					duration
-					realTime
-					distance
-					transitLeg
+						startTime
+						endTime
+						mode
+						duration
+						realTime
+						distance
+						transitLeg
+						legGeometry {
+							length
+							points
+						}
 					}
 				}
 			}
