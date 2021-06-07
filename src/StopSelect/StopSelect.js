@@ -27,9 +27,9 @@ const StopSelect = () => {
 
 	const polyUtil = require('polyline-encoded');
 	return (
-		<div class={styles.Wrapper}>
+		<div className={styles.Wrapper}>
 			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={mariaStop} end={allData[selectedIndex]} className={styles.MapViewWrapper}/>
-			<div class={styles.Selectors}>
+			<div className={styles.Selectors}>
 				<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
 				<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
 				<Button variant="primary" onClick={clickHandler}>Primary</Button>
