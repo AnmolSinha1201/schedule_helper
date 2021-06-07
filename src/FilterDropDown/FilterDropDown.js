@@ -34,8 +34,8 @@ const CustomMenu = React.forwardRef(
 	},
 );
 
-const FilterDropDown = ({defaultText = "Default", data, returnStateHandler}) => {
-	const [text, setText] = useState(defaultText);
+const FilterDropDown = ({defaultText = "Default", selectedIndex = null, data, returnStateHandler}) => {
+	const [text, setText] = useState(selectedIndex == null ? defaultText : data[selectedIndex]);
 	const selectHandler = (index) => {
 		setText(data[index])
 		returnStateHandler(index)
