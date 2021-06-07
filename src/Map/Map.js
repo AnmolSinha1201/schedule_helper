@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import styles from './Map.module.css'
 import 'leaflet/dist/leaflet.css';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Polyline, CircleMarker } from 'react-leaflet'
 import L from 'leaflet';
 
 import icon from 'leaflet/dist/images/marker-icon.png';
@@ -15,8 +15,35 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 
-const Map = () => {
+const positions = [
+	{ lat: 51.505, lng: -0.09 },
+	{ lat: 51.51, lng: -0.1 },
+	{ lat: 51.51, lng: -0.12 }
+];
 
+const renderPositions = (positions) => {
+	return (
+		<>
+		<Polyline color="#220bb9" positions={positions} />
+		{positions.map((position, index) => (
+			<CircleMarker
+			key={index}
+			center={position}
+			fill={true}
+			color="#220bb9"
+			radius={3}
+			>
+			<Popup>
+				<b>lat:</b> {position.lat} <br />
+				<b>lng:</b> {position.lng} <br />
+			</Popup>
+			</CircleMarker>
+		))}
+		</>
+	);
+}
+
+const Map = () => {
 	return (
 		<div className={styles.MapWrapper}>
 			{/* height and width style needed for leaflet to adjust to parent */}
@@ -30,6 +57,7 @@ const Map = () => {
 					A pretty CSS3 popup. <br /> Easily customizable.
 					</Popup>
 				</Marker>
+				{ renderPositions(positions) }
 			</MapContainer>
 		</div>
 	)
