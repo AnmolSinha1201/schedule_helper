@@ -9,7 +9,7 @@ const StopSelect = () => {
 	const [ allData, setAllData ] = useState([])
 	const [ selectedIndex, setSelectedIndex ] = useState(null);
 	const [ coordinates, setCoordinates ] = useState([]);
-	const mariaStop = { lat: 60.16843, lon: 24.92115 };
+	const mariaStop = { lat: 60.16843, lon: 24.92115, name: 'Maria' };
 
 	useEffect(() => {
 		getAllStops()
@@ -20,14 +20,12 @@ const StopSelect = () => {
 	}, [])
 
 	const clickHandler = () => {
-		console.log(`Between Maria and`, allData[selectedIndex])
 		getItinerary(mariaStop, allData[selectedIndex])
 		.then(result => {
-			console.log(result)
 			const polyUtil = require('polyline-encoded');
-			const latlngs = result.data.plan.itineraries[0].legs.map(leg => polyUtil.decode(leg.legGeometry.points)).flat(1);
-			console.log(latlngs);
-			setCoordinates(latlngs);
+			const latlngArray = result.data.plan.itineraries[0].legs.map(leg => polyUtil.decode(leg.legGeometry.points));
+			console.log(latlngArray);
+			setCoordinates(latlngArray);
 		})
 	}
 
@@ -36,7 +34,7 @@ const StopSelect = () => {
 			<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
 			<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
 			<Button variant="primary" onClick={clickHandler}>Primary</Button>
-			<MapView coordinates={coordinates} />
+			<MapView coordinatesArray={coordinates} start={mariaStop} end={allData[selectedIndex]} />
 		</div>
 	)
 }

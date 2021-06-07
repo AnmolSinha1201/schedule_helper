@@ -16,11 +16,16 @@ let DefaultIcon = L.icon({
 L.Marker.prototype.options.icon = DefaultIcon;
 
 
+const randomMax = (max) => {
+	return Math.floor(Math.random() * max);
+}
 
-const renderPositions = (positions) => {
+const renderPositions = (positions, index) => {
+	const color = '#' + randomMax(64).toString(16) + randomMax(64).toString(16) + randomMax(64).toString(16);
+	console.log(color)
 	return (
 		<>
-		<Polyline color="#220bb9" positions={positions} />
+		<Polyline color={'#' + Math.random().toString(16).substr(-6) } positions={positions} weight={3} key={index} />
 		{/* {positions.map((position, index) => (
 			<CircleMarker
 			key={index}
@@ -39,22 +44,31 @@ const renderPositions = (positions) => {
 	);
 }
 
-const MapView = ({coordinates}) => {
+const marker = (coordinate) => {
+	if (coordinate)
+		return (
+			<Marker position={[coordinate.lat, coordinate.lon]}>
+				<Popup>
+				{ coordinate.name }
+				</Popup>
+			</Marker>
+		)
+	return (<></>)
+}
+
+const MapView = ({coordinatesArray, start, end}) => {
 	
 	return (
 		<div className={styles.MapWrapper}>
 			{/* height and width style needed for leaflet to adjust to parent */}
-			<MapContainer center={[60.1699, 24.9384]} zoom={13} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }}>
+			<MapContainer center={[60.1699, 24.9384]} zoom={13} scrollWheelZoom={true} style={{ height: '100%', width: '100%' }} >
 				<TileLayer
 					attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				<Marker position={[51.505, -0.09]}>
-					<Popup>
-					A pretty CSS3 popup. <br /> Easily customizable.
-					</Popup>
-				</Marker>
-				{ renderPositions(coordinates) }
+				{ marker(start) }
+				{ marker(end) }
+				{ coordinatesArray.map((coordinates, index) => renderPositions(coordinates, index)) }
 			</MapContainer>
 		</div>
 	)
