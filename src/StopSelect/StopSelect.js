@@ -36,7 +36,7 @@ const StopSelect = () => {
 			<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
 			<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
 			<Button variant="primary" onClick={clickHandler}>Primary</Button>
-			<MapView />
+			<MapView coordinates={coordinates} />
 		</div>
 	)
 }
