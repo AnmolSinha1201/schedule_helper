@@ -39,7 +39,9 @@ const StopSelect = () => {
 					<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
 					<Button variant="primary" onClick={clickHandler}>Submit</Button>
 				</div>
-				<DisplayTable schedule={itineraries}/>
+				<div className={styles.TableWrapper}>
+					<DisplayTable schedule={itineraries}/>
+				</div>
 			</div>
 		</div>
 	)
