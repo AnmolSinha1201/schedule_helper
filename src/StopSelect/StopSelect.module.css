@@ -25,6 +25,7 @@
 {
 	display: flex;
 	width: 70%;
+	height: 38px;
 	justify-content: space-evenly;
 }
 
@@ -32,4 +33,20 @@
 {
 	width: 100%;
 	margin-top: 50px;
+}
+
+.SwapIconWrapper
+{
+	height: 100%;
+	width: 16px;
+	position: relative;
+}
+
+.SwapIcon
+{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	cursor: pointer;
 }

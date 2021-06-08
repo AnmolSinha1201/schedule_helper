@@ -42,7 +42,9 @@ const StopSelect = () => {
 			<div className={styles.SelectorsWrapper}>
 				<div className={styles.ControlsWrapper}>
 					<FilterDropDown defaultText='Select stop' data ={swap ? allData : mariaStop} returnStateHandler={swap ? setSelectedStop : (i) => {}} />
-					<FontAwesomeIcon icon={faExchangeAlt} />
+					<div className={styles.SwapIconWrapper}>
+						<FontAwesomeIcon icon={faExchangeAlt} className={styles.SwapIcon} onClick={() => {setSwap(!swap)}}/>
+					</div>
 					<FilterDropDown defaultText='Select stop' data ={swap ? mariaStop : allData} returnStateHandler={swap ? (i) => {} : setSelectedStop} />
 					<Button variant="primary" onClick={clickHandler}>Submit</Button>
 				</div>
