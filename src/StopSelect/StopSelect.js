@@ -6,6 +6,7 @@ import styles from './StopSelect.module.css'
 import DisplayTable from '../Table/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
+import Spinner from 'react-bootstrap/Spinner'
 
 const StopSelect = () => {
 	const mariaStop = [{ lat: 60.16843, lon: 24.92115, name: 'Maria' }];
@@ -15,6 +16,7 @@ const StopSelect = () => {
 	const [ stopB, setStopB ] = useState(null);
 	const [ itineraries, setItineraries ] = useState([]);
 	const [ swap, setSwap ] = useState(false);
+	const [ isLoading, setIsLoading ] = useState(false);
 	
 
 	useEffect(() => {
@@ -25,6 +27,8 @@ const StopSelect = () => {
 	}, [])
 
 	const clickHandler = () => {
+		setIsLoading(true);
+
 		const A = swap ? selectedStop[0] : mariaStop[0];
 		const B = swap ? mariaStop[0] : selectedStop[0];
 
@@ -32,7 +36,10 @@ const StopSelect = () => {
 		setStopB(B);
 		
 		getItinerary(A, B)
-		.then(result => setItineraries(result.data.plan.itineraries[0].legs));
+		.then(result => {
+			setItineraries(result.data.plan.itineraries[0].legs)
+			setIsLoading(false);
+		});
 	}
 
 	const polyUtil = require('polyline-encoded');
@@ -49,6 +56,12 @@ const StopSelect = () => {
 					<Button variant="primary" onClick={clickHandler}>Submit</Button>
 				</div>
 				<div className={styles.TableWrapper}>
+					{
+						isLoading &&
+						<Spinner animation="border" role="status">
+							<span className="sr-only">Loading...</span>
+						</Spinner>
+					}
 					<DisplayTable schedule={itineraries}/>
 				</div>
 			</div>
