@@ -8,35 +8,41 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 const StopSelect = () => {
-	const [ allStopsNamesA, setAllStopsNamesA ] = useState(['Maria'])
-	const [ allStopsNamesB, setAllStopsNamesB ] = useState([])
-	const [ allData, setAllData ] = useState([])
-	const [ selectedIndex, setSelectedIndex ] = useState(null);
-	const [ itineraries, setItineraries ] = useState([]);
 	const mariaStop = { lat: 60.16843, lon: 24.92115, name: 'Maria' };
+	const [ allData, setAllData ] = useState([])
+	const [ selectedStop, setSelectedStop ] = useState(null);
+	const [ stopA, setStopA ] = useState(mariaStop);
+	const [ stopB, setStopB ] = useState(null);
+	const [ itineraries, setItineraries ] = useState([]);
+	
 
 	useEffect(() => {
 		getAllStops()
 		.then(result => {
-			setAllStopsNamesB(result.data.stops.map(row => row.name))
 			setAllData(result.data.stops)
 		});
 	}, [])
 
 	const clickHandler = () => {
-		getItinerary(mariaStop, allData[selectedIndex])
-		.then(result => setItineraries(result.data.plan.itineraries[0].legs))
+		const A = mariaStop;
+		const B = selectedStop[0];
+
+		setStopA(A);
+		setStopB(B);
+		
+		getItinerary(A, B)
+		.then(result => setItineraries(result.data.plan.itineraries[0].legs));
 	}
 
 	const polyUtil = require('polyline-encoded');
 	return (
 		<div className={styles.Wrapper}>
-			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={mariaStop} end={allData[selectedIndex]} className={styles.MapViewWrapper}/>
+			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={stopA} end={stopB} className={styles.MapViewWrapper}/>
 			<div className={styles.SelectorsWrapper}>
 				<div className={styles.ControlsWrapper}>
-					<FilterDropDown defaultText='Select stop' selectedIndex={0} data ={allStopsNamesA} />
+					<FilterDropDown defaultText='Select stop' data ={[mariaStop]} />
 					<FontAwesomeIcon icon={faExchangeAlt} />
-					<FilterDropDown defaultText='Select stop' data ={allStopsNamesB} returnStateHandler={setSelectedIndex} />
+					<FilterDropDown defaultText='Select stop' data ={allData} returnStateHandler={setSelectedStop} />
 					<Button variant="primary" onClick={clickHandler}>Submit</Button>
 				</div>
 				<div className={styles.TableWrapper}>
