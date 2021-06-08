@@ -6,12 +6,19 @@
 	color: white;
 
 	position: relative;
+	
+	display: grid;
+	grid-template-columns: 20px 300px 20px auto;
+	grid-template-rows: auto;
+	grid-template-areas: 
+    ". title . navItems";
 }
 
 .Title
 {
+	grid-area: title;
+
 	position: absolute;
-	left: 20px;
 	top: 50%;
 	transform: translateY(-50%);
 
@@ -20,13 +27,12 @@
 
 .NavigationItems
 {
+	grid-area: navItems;
+
 	display: flex;
 	width: 200px;
 	justify-content: space-between;
 	height: 100%;
-
-	position: absolute;
-	left: 300px;
 }
 
 .SingleNavigationItem
