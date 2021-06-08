@@ -76,7 +76,7 @@
 	.Wrapper
 	{
 		grid-template-columns: 20px auto 20px;
-		grid-template-rows: 30% 20px auto 20px auto;
+		grid-template-rows: 30% 20px 150px 20px auto;
 		grid-template-areas: 
 		"map map map"
 		". . ."
