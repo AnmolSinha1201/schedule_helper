@@ -70,11 +70,16 @@ const StopSelect = () => {
 			<div className={styles.TableWrapper}>
 				{
 					isLoading &&
-					<Spinner animation="border" role="status">
-						<span className="sr-only">Loading...</span>
-					</Spinner>
+					<div className={styles.SpinnerCenter}>
+						<Spinner animation="border" role="status">
+							<span className="sr-only">Loading...</span>
+						</Spinner>
+					</div>
 				}
-				<DisplayTable schedule={itineraries}/>
+				{
+					!isLoading &&
+					<DisplayTable schedule={itineraries}/>
+				}
 			</div>
 			
 			<div  className={styles.Alert}>
