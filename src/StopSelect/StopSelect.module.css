@@ -50,3 +50,12 @@
 	transform: translate(-50%, -50%);
 	cursor: pointer;
 }
+
+.Alert 
+{
+	position: absolute;
+	bottom: 10px;
+	z-index: 500;
+	left: 50%;
+	transform: translateX(-50%);
+}

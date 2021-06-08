@@ -7,6 +7,7 @@ import DisplayTable from '../Table/Table'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 import Spinner from 'react-bootstrap/Spinner'
+import Alert from 'react-bootstrap/Alert'
 
 const StopSelect = () => {
 	const mariaStop = [{ lat: 60.16843, lon: 24.92115, name: 'Maria' }];
@@ -17,6 +18,7 @@ const StopSelect = () => {
 	const [ itineraries, setItineraries ] = useState([]);
 	const [ swap, setSwap ] = useState(false);
 	const [ isLoading, setIsLoading ] = useState(false);
+	const [ showAlert, setShowAlert ] = useState(false);
 	
 
 	useEffect(() => {
@@ -27,6 +29,11 @@ const StopSelect = () => {
 	}, [])
 
 	const clickHandler = () => {
+		if (selectedStop == null)
+		{
+			setShowAlert(true);
+			return;
+		}
 		setIsLoading(true);
 
 		const A = swap ? selectedStop[0] : mariaStop[0];
@@ -65,6 +72,14 @@ const StopSelect = () => {
 					<DisplayTable schedule={itineraries}/>
 				</div>
 			</div>
+			{
+				showAlert &&
+				<div  className={styles.Alert}>
+					<Alert variant='danger' dismissible onClose={() => setShowAlert(false)}>
+						Please select both the destinations in the selection boxes!
+					</Alert>
+				</div>
+			}
 		</div>
 	)
 }
