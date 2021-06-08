@@ -22,7 +22,6 @@ const randomMax = (max) => {
 
 const renderPositions = (positions, index) => {
 	const color = ('#' + randomMax(64).toString(16) + randomMax(64).toString(16) + randomMax(64).toString(16)).padEnd(7, '0');
-	console.log(color)
 	return (
 		<Polyline color={color } positions={positions} weight={4} key={index} />
 	);
