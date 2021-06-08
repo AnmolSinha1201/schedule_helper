@@ -4,7 +4,7 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import Form from 'react-bootstrap/Form'
 
 const FilterDropDown = ({defaultText = "Default", selectedIndex = null, data, returnStateHandler = (opt) => {}}) => {
-	const [singleSelections, setSingleSelections] = useState([]);
+	const [singleSelections, setSingleSelections] = useState(selectedIndex == null ? [] : [data[selectedIndex]]);
 
 	const handleChange = (selectedOptions) => {
 		setSingleSelections(selectedOptions);
