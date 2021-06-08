@@ -7,6 +7,7 @@ const FilterDropDown = ({defaultText = "Default", selectedIndex = null, data, re
 	const [singleSelections, setSingleSelections] = useState([]);
 
 	const handleChange = (selectedOptions) => {
+		setSingleSelections(selectedOptions);
 		returnStateHandler(selectedOptions);
 	}
 
