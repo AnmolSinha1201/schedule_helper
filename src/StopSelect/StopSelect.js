@@ -53,37 +53,38 @@ const StopSelect = () => {
 	return (
 		<div className={styles.Wrapper}>
 			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={stopA} end={stopB} className={styles.MapViewWrapper}/>
-			<div className={styles.SelectorsWrapper}>
-				<div className={styles.ControlsWrapper}>
-					<FilterDropDown defaultText='Select stop' selectedIndex={swap ? null : 0 }
-						data ={swap ? allData : mariaStop} returnStateHandler={swap ? setSelectedStop : (i) => {}} 
-					/>
-					<div className={styles.SwapIconWrapper}>
-						<FontAwesomeIcon icon={faExchangeAlt} className={styles.SwapIcon} onClick={() => {setSwap(!swap)}}/>
-					</div>
-					<FilterDropDown defaultText='Select stop' selectedIndex={swap ? 0 : null }
-						data ={swap ? mariaStop : allData} returnStateHandler={swap ? (i) => {} : setSelectedStop} 
-					/>
-					<Button variant="primary" onClick={clickHandler}>Submit</Button>
+
+			<div className={styles.ControlsWrapper}>
+				<FilterDropDown defaultText='Select stop' selectedIndex={swap ? null : 0 }
+					data ={swap ? allData : mariaStop} returnStateHandler={swap ? setSelectedStop : (i) => {}} 
+				/>
+				<div className={styles.SwapIconWrapper}>
+					<FontAwesomeIcon icon={faExchangeAlt} className={styles.SwapIcon} onClick={() => {setSwap(!swap)}}/>
 				</div>
-				<div className={styles.TableWrapper}>
-					{
-						isLoading &&
-						<Spinner animation="border" role="status">
-							<span className="sr-only">Loading...</span>
-						</Spinner>
-					}
-					<DisplayTable schedule={itineraries}/>
-				</div>
+				<FilterDropDown defaultText='Select stop' selectedIndex={swap ? 0 : null }
+					data ={swap ? mariaStop : allData} returnStateHandler={swap ? (i) => {} : setSelectedStop} 
+				/>
+				<Button variant="primary" onClick={clickHandler}>Submit</Button>
 			</div>
-			{
-				showAlert &&
-				<div  className={styles.Alert}>
+
+			<div className={styles.TableWrapper}>
+				{
+					isLoading &&
+					<Spinner animation="border" role="status">
+						<span className="sr-only">Loading...</span>
+					</Spinner>
+				}
+				<DisplayTable schedule={itineraries}/>
+			</div>
+			
+			<div  className={styles.Alert}>
+				{
+					showAlert &&
 					<Alert variant='danger' dismissible onClose={() => setShowAlert(false)}>
 						Please select both the destinations in the selection boxes!
 					</Alert>
-				</div>
-			}
+				}
+			</div>
 		</div>
 	)
 }
