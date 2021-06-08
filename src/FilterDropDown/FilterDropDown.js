@@ -12,16 +12,14 @@ const FilterDropDown = ({defaultText = "Default", selectedIndex = null, data, re
 	}
 
 	return (
-		<Form.Group>
-			<Typeahead
-				id="basic-typeahead-single"
-				labelKey={option => option.name}
-				options = {data}
-				placeholder={defaultText}
-				selected={singleSelections}
-				onChange={handleChange}
-			/>
-		</Form.Group>
+		<Typeahead
+			id="basic-typeahead-single"
+			labelKey={option => option.name}
+			options = {data}
+			placeholder={defaultText}
+			selected={singleSelections}
+			onChange={handleChange}
+		/>
 	);
 }
 
