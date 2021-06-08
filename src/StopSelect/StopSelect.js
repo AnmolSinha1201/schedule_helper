@@ -8,12 +8,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faExchangeAlt } from '@fortawesome/free-solid-svg-icons'
 
 const StopSelect = () => {
-	const mariaStop = { lat: 60.16843, lon: 24.92115, name: 'Maria' };
+	const mariaStop = [{ lat: 60.16843, lon: 24.92115, name: 'Maria' }];
 	const [ allData, setAllData ] = useState([])
 	const [ selectedStop, setSelectedStop ] = useState(null);
-	const [ stopA, setStopA ] = useState(mariaStop);
+	const [ stopA, setStopA ] = useState(mariaStop[0]);
 	const [ stopB, setStopB ] = useState(null);
 	const [ itineraries, setItineraries ] = useState([]);
+	const [ swap, setSwap ] = useState(false);
 	
 
 	useEffect(() => {
@@ -24,8 +25,8 @@ const StopSelect = () => {
 	}, [])
 
 	const clickHandler = () => {
-		const A = mariaStop;
-		const B = selectedStop[0];
+		const A = swap ? selectedStop[0] : mariaStop[0];
+		const B = swap ? mariaStop[0] : selectedStop[0];
 
 		setStopA(A);
 		setStopB(B);
@@ -40,9 +41,9 @@ const StopSelect = () => {
 			<MapView coordinatesArray={itineraries.map(leg => polyUtil.decode(leg.legGeometry.points))} start={stopA} end={stopB} className={styles.MapViewWrapper}/>
 			<div className={styles.SelectorsWrapper}>
 				<div className={styles.ControlsWrapper}>
-					<FilterDropDown defaultText='Select stop' data ={[mariaStop]} />
+					<FilterDropDown defaultText='Select stop' data ={swap ? allData : mariaStop} returnStateHandler={swap ? setSelectedStop : (i) => {}} />
 					<FontAwesomeIcon icon={faExchangeAlt} />
-					<FilterDropDown defaultText='Select stop' data ={allData} returnStateHandler={setSelectedStop} />
+					<FilterDropDown defaultText='Select stop' data ={swap ? mariaStop : allData} returnStateHandler={swap ? (i) => {} : setSelectedStop} />
 					<Button variant="primary" onClick={clickHandler}>Submit</Button>
 				</div>
 				<div className={styles.TableWrapper}>
